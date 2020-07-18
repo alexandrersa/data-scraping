@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
   crawler:
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
     build: .
     volumes:
-      - .:/usr/src/app
-    env_file:
-      - ./.env
+      - ${VOLUME_DATA}:/usr/src/app
