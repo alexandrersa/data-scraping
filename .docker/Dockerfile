@@ -12,10 +12,10 @@ RUN apt-get update
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt ./
+RUN pip3 install -r requirements.txt
 
-COPY . /usr/src/app/
+COPY . .
 
 # run scrapy
-#CMD [ "python3", "/usr/src/app/crawler/scrapy.py" ]
+CMD [ "scrapy", "shell", "--nolog" ]
