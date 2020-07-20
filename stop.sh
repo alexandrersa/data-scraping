@@ -1,6 +1,6 @@
 #!/bin/bash
 
 
-docker-compose -f .docker/docker-compose.yml down
+docker-compose -f docker-compose.yml down --remove-orphans
 
 exit 0

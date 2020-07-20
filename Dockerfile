@@ -23,7 +23,11 @@ RUN apt-get update && \
 RUN python3 -m pip install --upgrade \
 		setuptools \
 		wheel && \
-	python3 -m pip install --upgrade scrapy
+	python3 -m pip install --upgrade scrapy3
+
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
 
 ADD ../crawler /usr/src/app
 

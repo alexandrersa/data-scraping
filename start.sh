@@ -7,6 +7,6 @@ else
     exit 1
 fi
 
-docker-compose -f .docker/docker-compose.yml up -d --build
+docker build --no-cache -t docker_scraping .
 
 exit 0

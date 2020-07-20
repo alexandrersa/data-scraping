@@ -1,3 +1,2 @@
 scrapy3==1.0.1
-aiohttp==3.6.2
 scrapy-user-agents==0.1.1
