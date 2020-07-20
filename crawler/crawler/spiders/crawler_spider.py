@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import json
-import scrapy
-import sys
 from urllib.parse import urlparse
+import sys
+import scrapy
 from scrapy import Request, spidermiddlewares
 from .phones import Phones
 from .logo import Logo
@@ -39,7 +39,10 @@ class CrawlerSpider(scrapy.Spider):
             yield Request(url)
 
     def parse(self, response):
-
+        """
+        Method is in charge of processing the response
+        and returning scraped data.
+        """
         data = {'logo': self.logo.get_logo(response),
                 'phones': self.phones.get_phones(response),
                 'website': response.request.url

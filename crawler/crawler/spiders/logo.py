@@ -3,7 +3,7 @@
 
 class Logo(object):
 
-    def extract_home_page(self, response) -> str:
+    def home_page(self, response) -> str:
         """Extract the Home Page Address or Website First Page Address.
         :param response:
         :return:
@@ -41,7 +41,7 @@ class Logo(object):
                         logo_path = img_url
                     else:
                         img_url = self.clean_url(img_url)
-                        logo_path = self.extract_home_page(response) + img_url
+                        logo_path = self.home_page(response) + img_url
 
         ### Case 2: when <div> contains <img>  with logo substring in its @src
         if not CHECK:
@@ -55,12 +55,14 @@ class Logo(object):
                             logo_path = img_url
                         else:
                             img_url = self.clean_url(img_url)
-                            logo_path = self.extract_home_page(response) + img_url
+                            logo_path = self.home_page(response) + img_url
 
         ### Case 3: when <a> contains <img> with logo substring in its @class
         if not CHECK:
             for tag_a in response.xpath('//a'):
-                img_url = tag_a.xpath('.//img[contains(@class,"logo")]/@src').extract()
+                img_url = tag_a.xpath(
+                    './/img[contains(@class,"logo")]/@src'
+                ).extract()
 
                 if img_url:
                     CHECK = True
@@ -70,24 +72,26 @@ class Logo(object):
                                 logo_path = i
                             else:
                                 img_url = self.clean_url(i)
-                                logo_path = self.extract_home_page(response) + i
+                                logo_path = self.home_page(response) + i
                     else:
                         if "http" in img_url:
                             logo_path = img_url
                         else:
                             img_url = self.clean_url(img_url)
-                            logo_path = self.extract_home_page(response) + img_url
+                            logo_path = self.home_page(response) + img_url
 
         ### Case 4: when <a> contains <div> with logo into background-image
         if not CHECK:
             for tag_a in response.xpath('//a'):
-                img_url = tag_a.xpath('//div[contains(@class,"logo")]/@style').re_first(r'url\(([^\)]+)')
+                img_url = tag_a.xpath(
+                    '//div[contains(@class,"logo")]/@style'
+                ).re_first(r'url\(([^\)]+)')
                 if img_url:
                     CHECK = True
                     if "http" in img_url:
                         logo_path = img_url
                     else:
                         img_url = self.clean_url(img_url)
-                        logo_path = self.extract_home_page(response) + img_url
+                        logo_path = self.home_page(response) + img_url
 
         return logo_path
