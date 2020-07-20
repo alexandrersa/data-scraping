@@ -6,4 +6,4 @@ services:
     restart: unless-stopped
     build: .
     volumes:
-      - ${VOLUME_DATA}:/usr/src/app
+      - .:/usr/src/app
