@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-
+"""
+Module that will cat all phones available in web sites.
+"""
 import re
 from functools import reduce
 
 
-class Phones(object):
+class Phones():
+    """
+    Class that will obtain all phone numbers of the websites from some regular
+    expressions.
+    """
     name = "Phones"
 
     def get_phones(self, response) -> list:

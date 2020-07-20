@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
+"""
+Module that will deal with the logos of the sites.
+"""
 
-
-class Logo(object):
-
+class Logo():
+    """
+    Class that will obtain the logos of the websites from some
+    pre-defined patterns, such as class name, image name and src.
+    """
     def home_page(self, response) -> str:
         """Extract the Home Page Address or Website First Page Address.
         :param response:
