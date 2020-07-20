@@ -31,14 +31,15 @@ class Phones(object):
         phone_list = re.findall(
             r'([(]?(\d{3})?[)]?(\s|-|\.)?(\d{3})(\s|-|\.)(\d{4})|'
             r'\+\d{2}\s?0?\d{10}|'
-            r'[+](\d{2}) [(]?(\d{2,3})?[)]? (\d{4,5})(\s|-|\.)(\d{4})|'            
+            r'(\d{2,4}) (\d{2,4}) (\d{2,4})|'
+            r'[+](\d{2}) [(]?(\d{1,3})?[)]? (\d{4,5})(\s|-|\.)(\d{4})|'            
             r'[+]?(\d) [(]?(\d{3})?[)]? (\d{3})(\s|-|\.)(\d{2})(\s|-|\.)?(\d{2}))',
             html
         )
         for i in phone_list:
             if len(i) >= 10:
                 for j in i:
-                    if len(j) >= 10:
+                    if len(j) >= 6:
                         valid_phones.append(j)
         return valid_phones
 
@@ -48,11 +49,11 @@ class Phones(object):
         :param phone_number:
         :return:
         """
-        #clean_phone_number = re.sub(r'[^0-9]+', '', phone_number)
-
-        #phone_number = re.sub(
-        #    r'(\d{1,2})(\d{2,3})(\d{3,4})(\d{4})',
-        #    r'+\1 (\2) \3 \4',
-        #    clean_phone_number
-        #)
+        # clean_phone_number = re.sub(r'[^0-9]+', '', phone_number)
+        phone_number = phone_number.replace('-', ' ')
+        phone_number = re.sub(
+            r'(\d{1,2})(\d{2,3})(\d{3,4})(\d{4})',
+            r'+\1 (\2) \3 \4',
+            phone_number
+        )
         return phone_number
