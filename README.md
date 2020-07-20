@@ -8,29 +8,36 @@ Application developed with the aim of dynamically detecting the path of the webs
 
 1. Clone this project.
 2. Open them in your terminal.
-3. Set execution permissions for the start.sh and stop.sh scripts.
+3. Set execution permissions for the build.sh and stop.sh scripts.
     ```sh
-   $ chmod +x start.sh stop.sh
+   $ chmod +x build.sh stop.sh
    ```
 4. Build the image and run the container
 
     ```sh
-    $ ./start.sh
+    $ ./build.sh
     ```
 
-4. Or you can simply start your compose enviornment:
+4. Or you can simply execute on data-scraping folder. 
+    After executing this command, your environment will be reflected in the container you created now.:
+    Then replace the existing list of sites with other sites of your choice.
+    
+    ```
+    $ docker run -v crawler:/usr/src/app -it data-scraping_crawler /bin/bash
+    ```
+
+5. In this step will appear a console into docker container, then run.
 
     ```
-    $ docker-compose -f .docker/docker-compose.yml up -d --build
+    $ cd crawler
+    $ cat crawler/spiders/websites.txt | scrapy crawl Crawler
     ```
+    
+There, now you can consult your file with the logo of the company you want, in addition to the contacts.
 
-Now you can run 
-    ```
-    cat websites.txt | docker run -i crawler
-    ```
-and will return a list of paths.
+ If you want to stop the environment, just type in the ```exit()``` terminal.
 
-5. Stop your environment
+7. To disable the docker instance, just execute the command below.
 
     ```sh
     $ ./stop.sh
